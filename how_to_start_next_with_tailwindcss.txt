@@ -1,0 +1,133 @@
+1. make sure that your next app is latest version
+ - npm i next@latest
+
+2. create github repository of new project
+ - `after making github repository` git init / git remote add origin <address>
+ - replace readme file if you want. 
+
+3. delete 
+ - Home.module.css at styles folder
+ - api folder (will make later)
+
+4. install tailwindcss / postcss / autoprefixer
+ - npm i -D tailwindcss postcss autoprefixer
+
+5. initiate tailwindcss
+ - npx tailwindcss init -p
+ files will be made by command -> postcss.config / tailwindcss.config
+
+6. edit tailwindcss.config
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,tsx,jsx}" ,
+    "./components/**/*.{js,ts,tsx,jsx}"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+7. edit global.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+8. install extension Tailwind CSS IntelliSense
+9. install tailwind plugin 
+ - npm install -D @tailwindcss/forms
+
+10. edit tailwindcss.config
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,tsx,jsx}" ,
+    "./components/**/*.{js,ts,tsx,jsx}"
+  ],
+  theme: {
+    extend: {},
+  },
+  darkMode: "media",
+  plugins: [require("@tailwindcss/forms")],
+}
+
+--- ORM setting - prisma <-> planetScale ---
+
+11 install Prisma extension
+
+12 Prisma command line 
+ - npx prisma init
+
+13 edit schema at prisma > schema.prisma
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+(create Modle ex> 
+    Modle User {
+      id Int @id @default(autoincrement())
+      name String
+      //물음표가 붙으면 옵셔널 (null 가능)
+      phone Int? @unique
+      email String? @unique
+      createdAt DateTime @default(now())
+      updatedAt DateTime @updatedAt
+    }
+)
+
+14 install scoop.sh (for window only)
+ - open powershell 
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    irm get.scoop.sh | iex
+
+15 download planetScale using scoop
+ - scoop bucket add pscale https://github.com/planetscale/scoop-bucket.git
+ - scoop install pscale mysql
+ - scoop update pscale
+
+ check if pscale is successfully installed your computer -> pscale on console.
+
+16 pscale login 
+ - pscale auth login
+    --(check region)--
+    - pscale region list
+
+17 make database
+ - pscale database create <database name> --region <location>
+ - ex ) pscale database create myDataBase --region ap-northeast
+
+18 get database url
+ - pscale connect <database name> 
+ that command will show you database url including portnumber.
+
+19 edit .env file
+DATABASE_URL="mysql://<database URL>/<database name>"
+
+20 edit schema.prisma 
+  generator client {
+    provider = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
+  }
+
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    referentialIntegrity = "prisma"
+  }
+
+21 push database using prisma
+ - npx prisma db push
+ (can find this on branch -> main -> schema)
+ (also you can see the dashboard(admin pannel) - npx prisma studio)
+
+22 make client.ts at libs folder
+23 install prisma client
+ - npm i @prisma/client
+  (now can use import {PrismaClient} from "@prisma/client";)
+  (also can use npx prisma generate  but not this time.)
+
+  use client like this = 
+  const client = new PrismaClient();
+  client.<tablename>.create ({data : {key:value , key:value}})
+
+24 create api folder inside pages folder  
