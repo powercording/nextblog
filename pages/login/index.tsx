@@ -1,11 +1,13 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/Input";
-import Tooltip from "../../components/Tooltip";
+import { Tooltip } from "../../components/Tooltip";
 
 const Login: NextPage = () => {
   const { register } = useForm();
+  const tooltipRef = useRef<HTMLDivElement>();
+  console.log(tooltipRef);
 
   return (
     <div className="flex flex-col justify-center items-center py-10 w-full lg:w-2/4 mx-auto ">
@@ -14,7 +16,7 @@ const Login: NextPage = () => {
       </div>
       <form action="">
         <div className="w-full flex px-4 items-center justify-around gap-3">
-          <Tooltip tip="ㅇ앙?">
+          <Tooltip ref={tooltipRef} tip="ㅇ앙?">
             <Input
               name="id"
               label="ID"
