@@ -18,9 +18,17 @@ export default function Input({
   ...rest
 }: InputType) {
   return (
-    <div className="flex flex-col items-center w-full">
-      <label htmlFor={name}>{label}</label>
-      <input id={name} type={type} {...register} {...rest} className="w-3/4" />
+    <div className="flex flex-col items-center w-full group ">
+      <label htmlFor={name} className="cursor-pointer">
+        {label}
+      </label>
+      <input
+        id={name}
+        type={type}
+        {...register}
+        {...rest}
+        className="w-full rounded-md focus:outline-none focus:border-black focus:ring-gray-400 shadow-lg "
+      />
     </div>
   );
 }
