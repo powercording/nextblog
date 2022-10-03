@@ -1,0 +1,8 @@
+0. add headers {
+  "Content-Type" : "application/josn"
+} bcause the parser is setted based on req.body so can't show a field of data.
+if we did this, we can see the detail of fields of data
+
+1. check API method 
+  if the method isn't what you expect must send an error to client
+
