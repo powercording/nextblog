@@ -6,33 +6,40 @@ import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
-const Login: NextPage = () => {
-  const { register, handleSubmit } = useForm();
-  const route = useRouter();
-  function buttonClick(e: React.SyntheticEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault();
-    route.push("/login/join").then((what) => console.log(what));
-  }
+interface LoginInterface {
+  email: string;
+  password: string;
+}
 
-  const submitEvent: () => void = () => {
-    console.log("hi");
+const Login: NextPage = () => {
+  const { register, handleSubmit } = useForm<LoginInterface>();
+  // const route = useRouter();
+  // function buttonClick(e: React.SyntheticEvent<HTMLButtonElement, MouseEvent>) {
+  //   e.preventDefault();
+  //   route.push("/login/join").then((what) => console.log(what));
+  // }
+
+  const handleLogin = (loginForm: LoginInterface) => {
+    console.log("loginform : ", loginForm);
   };
 
   return (
-    <div className="w-full lg:w-2/4 mx-auto divide-y divide-gray-600 ">
+    <div className="w-full lg:w-2/4 mx-auto border-gray-300 border-2 rounded-lg">
       <div className="py-10">
-        <h1 className="px-5"> SD's nextjs Blog</h1>
+        <h1 className="px-5 text-center text-xl font-bold">
+          SD's nextjs Blog
+        </h1>
       </div>
       <form
-        onSubmit={handleSubmit(submitEvent)}
+        onSubmit={handleSubmit(handleLogin)}
         className="flex flex-col py-10 items-center"
       >
         <div className="w-full flex px-4 items-center justify-around gap-3">
           <Input
-            name="id"
-            label="ID"
+            name="email"
+            label="ID ( EMAIL )"
             type="text"
-            register={register("id", { required: "아이디를 입력해주세요" })}
+            register={register("email", { required: "아이디를 입력해주세요" })}
           />
 
           <Input
@@ -45,11 +52,11 @@ const Login: NextPage = () => {
           />
         </div>
         <div className=" flex justify-around w-full gap-3 px-4 mt-5">
-          <Button href={"login"} type="submit" onClick={buttonClick}>
+          <Button href={"login"} type="submit" >
             <p className="font-medium text-md">접속합니다</p>
           </Button>
 
-          <Button href={"/login/join"} type="button" onClick={buttonClick}>
+          <Button href={"/login/join"} type="button" >
             <p className="font-medium text-md">가입할게요</p>
           </Button>
         </div>
