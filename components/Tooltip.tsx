@@ -7,9 +7,10 @@ interface TooltipInterface {
 }
 
 export const Tooltip = (
-  { tip, children, ...rest }: TooltipInterface,
+  props: TooltipInterface,
   ref: React.RefObject<HTMLDivElement>
 ) => {
+  const { tip, children, ...rest } = props;
   return (
     <div className="w-full">
       <div

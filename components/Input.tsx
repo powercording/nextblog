@@ -9,14 +9,9 @@ interface InputType {
   [key: string]: any;
 }
 
-export default function Input({
-  label,
-  name,
-  type,
-  kind,
-  register,
-  ...rest
-}: InputType) {
+export default function Input(props: InputType) {
+  const { label, name, type, kind, register, ...rest } = props;
+
   return (
     <>
       {label && (

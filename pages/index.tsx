@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
+import { NextPage } from "next";
 
-const Home: NextPage = () => {
-  return <div>넥스트 블로그</div>;
+const Main: NextPage = () => {
+  return <div>사랑합니다</div>;
 };
 
-export default Home;
+export default Main;

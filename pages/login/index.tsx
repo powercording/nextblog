@@ -1,10 +1,10 @@
 import { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import styled, { keyframes } from "styled-components";
+import { Cursor } from "../../styled";
 
 interface LoginInterface {
   email: string;
@@ -13,21 +13,24 @@ interface LoginInterface {
 
 const Login: NextPage = () => {
   const { register, handleSubmit } = useForm<LoginInterface>();
-  // const route = useRouter();
-  // function buttonClick(e: React.SyntheticEvent<HTMLButtonElement, MouseEvent>) {
-  //   e.preventDefault();
-  //   route.push("/login/join").then((what) => console.log(what));
-  // }
 
   const handleLogin = (loginForm: LoginInterface) => {
-    console.log("loginform : ", loginForm);
+    console.dir("loginform : ", loginForm);
   };
+
+  setTimeout(() => {
+    const cursor = document.getElementById("vix");
+    if (cursor) {
+      console.log(cursor!.style.left);
+    }
+  }, 3000);
 
   return (
     <div className="w-full lg:w-2/4 mx-auto border-gray-300 border-2 rounded-lg">
-      <div className="py-10">
+      <div className="py-10 ">
         <h1 className="px-5 text-center text-xl font-bold">
-          SD's nextjs Blog
+          <Cursor id="vix" />
+          SDs nextjs Blog
         </h1>
       </div>
       <form
@@ -52,11 +55,11 @@ const Login: NextPage = () => {
           />
         </div>
         <div className=" flex justify-around w-full gap-3 px-4 mt-5">
-          <Button href={"login"} type="submit" >
+          <Button href={"login"} type="submit">
             <p className="font-medium text-md">접속합니다</p>
           </Button>
 
-          <Button href={"/login/join"} type="button" >
+          <Button href={"/login/join"} type="button">
             <p className="font-medium text-md">가입할게요</p>
           </Button>
         </div>
