@@ -3,8 +3,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import styled, { keyframes } from "styled-components";
 import { Cursor } from "../../styled";
+import useMutation from "../../libs/client/useMutation";
 
 interface LoginInterface {
   email: string;
@@ -12,18 +12,14 @@ interface LoginInterface {
 }
 
 const Login: NextPage = () => {
+  const [mutation, { loading, data, error }] = useMutation("api/users/test");
   const { register, handleSubmit } = useForm<LoginInterface>();
 
   const handleLogin = (loginForm: LoginInterface) => {
-    console.dir("loginform : ", loginForm);
+    console.log("loginform : ", loginForm);
+    mutation(loginForm);
   };
-
-  setTimeout(() => {
-    const cursor = document.getElementById("vix");
-    if (cursor) {
-      console.log(cursor!.style.left);
-    }
-  }, 3000);
+  console.log(loading, data, error);
 
   return (
     <div className="w-full lg:w-2/4 mx-auto border-gray-300 border-2 rounded-lg">
