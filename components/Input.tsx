@@ -26,7 +26,7 @@ export default function Input(props: InputType) {
           />
           <label
             htmlFor={name}
-            className="transition-all duration-500 cursor-pointer absolute left-10 peer-focus:-top-3 peer-focus:bg-gray-50 peer-focus:px-2 peer-focus:left-8 peer-focus:border-x peer-focus:border-x-gray-500 
+            className="transition-all cursor-pointer absolute left-10 peer-focus:-top-3 peer-focus:bg-gray-50 peer-focus:px-2 peer-focus:left-8 peer-focus:border-x peer-focus:border-x-gray-500 
         peer-valid:-top-3 peer-valid:bg-gray-50 peer-valid:px-2 peer-valid:border-x-2 peer-valid:border-x-gray-500 peer-valid:left-8 peer-valid:text-blue-500"
           >
             {label}
